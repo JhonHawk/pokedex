@@ -1,1 +1,9 @@
-<p>pokemon-list works!</p>
+@if (!pokemonServices.loading()) {
+  @for (item of pokemonServices.pokemons(); track item.name) {
+    <a [routerLink]="['/detail', item.name ]">
+      <img [ngSrc]="urlImage + item.name + '.jpg'" alt="" [width]="85" [height]="100">
+    </a>
+  }
+} @else {
+  <p>Loading...</p>
+}

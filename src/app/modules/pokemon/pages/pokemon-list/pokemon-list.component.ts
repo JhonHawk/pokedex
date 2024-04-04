@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { PokemonService } from '../../../../core/services/pokemon.service';
 import { PokemonListCardComponent } from '../../components/pokemon-list-card/pokemon-list-card.component';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -40,14 +40,9 @@ export class PokemonListComponent {
       .subscribe((value) => {
         this.pokemonServices.setPokemonsFilter(value);
       });
-
-    effect(() => {
-      console.log('paginatorstate', this.paginatorState());
-    });
   }
 
   onPageChange(pageEvent: PaginatorState) {
-    console.log(pageEvent);
     const newPage = pageEvent.page;
     if (pageEvent.page == undefined) {
       return;

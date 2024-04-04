@@ -1,13 +1,20 @@
 export interface PokemonListPagination {
-  count: number
-  next: string
-  previous: any
-  results: Result[]
-  loading: boolean
+  count: number;
+  paginatorState: PageEvent;
+  results: Result[];
+  loading: boolean;
 }
+
 export interface Result {
-  name: string
-  url: string
+  name: string;
+  url: string;
+  index: number;
+}
+
+export interface PageEvent {
+  first: number;
+  rows: number;
+  page: number;
 }
 
 export type PokemonList = Result[];

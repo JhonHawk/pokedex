@@ -1,1 +1,29 @@
-<p>pokemon-list-card works!</p>
+@if (pokemon) {
+  @defer (on viewport) {
+    <p-card [style]="{ width: '200px' }" styleClass="m-2">
+      <section
+        [routerLink]="['/detail', pokemon.name]"
+        class="p-3 bg-no-repeat bg-center w-full h-12rem border-round flex align-content-center flex-wrap"
+        style="
+          background-image: url(/assets/images/poke_logo.png);
+          /*background-size: cover;*/
+          cursor: pointer;
+        "
+      >
+        <img
+          [src]="urlImage + pokemon.index + '.svg'"
+          alt=""
+          class="w-full h-full"
+        />
+      </section>
+    </p-card>
+  } @placeholder {
+    <p-card [style]="{ width: '280px' }" styleClass="m-2">
+      <section
+        class="p-3 bg-no-repeat bg-center w-full h-12rem border-round flex align-content-center flex-wrap"
+      >
+<!--        <img src="/assets/images/poke_logo.png" alt="" class="w-full h-full" />-->
+      </section>
+    </p-card>
+  }
+}

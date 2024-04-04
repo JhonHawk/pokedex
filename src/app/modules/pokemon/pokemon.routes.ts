@@ -4,11 +4,33 @@ import { PokemonDetailComponent } from './pages/pokemon-detail/pokemon-detail.co
 
 export const routes: Routes = [
   {
-    path: '',
-    component: PokemonListComponent,
+    path: 'pokedex/0',
+    redirectTo: 'pokedex/1',
+  },
+  {
+    path: 'pokedex/:page',
+    loadComponent: () =>
+      import('./pages/pokemon-list/pokemon-list.component').then(
+        (m) => m.PokemonListComponent,
+      ),
   },
   {
     path: 'detail/:name',
-    component: PokemonDetailComponent,
-  }
+    loadComponent: () =>
+      import('./pages/pokemon-detail/pokemon-detail.component').then(
+        (m) => m.PokemonDetailComponent,
+      ),
+  },
+  {
+    path: 'profile',
+    loadComponent: () =>
+      import('./pages/profile/profile.component').then(
+        (m) => m.ProfileComponent,
+      ),
+  },
+  {
+    path: '**',
+    redirectTo: 'pokedex/1',
+    pathMatch: 'full',
+  },
 ];

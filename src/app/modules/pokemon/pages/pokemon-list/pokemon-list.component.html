@@ -1,9 +1,36 @@
-@if (!pokemonServices.loading()) {
-  @for (item of pokemonServices.pokemons(); track item.name) {
-    <a [routerLink]="['/detail', item.name ]">
-      <img [ngSrc]="urlImage + item.name + '.jpg'" alt="" [width]="85" [height]="100">
-    </a>
+<p-toolbar>
+  <div class="p-toolbar-group-start">
+    <button
+      [routerLink]="['/profile']"
+      class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"
+    >
+      <i class="pi pi-user text-2xl"></i>
+    </button>
+  </div>
+  <div class="p-toolbar-group-center">
+    <span class="p-input-icon-left">
+      <i class="pi pi-search"></i>
+      <input pInputText placeholder="Search" [formControl]="search" />
+    </span>
+  </div>
+</p-toolbar>
+
+<div class="flex justify-content-center flex-wrap mt-2">
+  @if (!pokemonServices.loading()) {
+    @for (item of pokemonServices.pokemons(); track item.name) {
+      <app-pokemon-list-card [pokemon]="item" />
+    }
+  } @else {
+    <p>Loading...</p>
   }
-} @else {
-  <p>Loading...</p>
-}
+</div>
+<div class="flex-auto">
+  <p-paginator
+    locale="en-US"
+    (onPageChange)="onPageChange($event)"
+    [first]="paginatorState().first"
+    [rows]="paginatorState().rows"
+    [pageLinkSize]="1"
+    [totalRecords]="pokemonServices.state().count"
+  ></p-paginator>
+</div>

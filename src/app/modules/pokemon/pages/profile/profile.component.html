@@ -1,1 +1,87 @@
 <app-toolbar />
+
+<section class="flex justify-content-center flex-wrap">
+  <p-card [style]="{ width: '600px' }" styleClass="mt-3">
+    <ng-template pTemplate="body">
+      <form [formGroup]="profileForm">
+        <div class="flex flex-column w-full justify-content-center gap-5">
+          <div class="flex flex-column gap-2">
+            <span class="p-float-label flex flex-column w-full">
+              <input pInputText id="nickname" formControlName="nickname" />
+              <label for="nickname">Nickname</label>
+            </span>
+            <small id="username-help">
+              Máximo 8 caracteres, no puede iniciar con un número.
+            </small>
+          </div>
+
+          <div class="flex flex-column gap-2">
+            <span class="p-float-label flex flex-column w-full">
+              <input pInputText id="firstName" formControlName="firstName" />
+              <label for="nickname">Nombres(s)</label>
+            </span>
+          </div>
+
+          <div class="flex flex-column gap-2">
+            <span class="p-float-label flex flex-column w-full">
+              <input pInputText id="lastName" formControlName="lastName" />
+              <label for="lastName">Apellidos</label>
+            </span>
+          </div>
+
+          <div class="flex flex-column gap-2">
+            <span class="p-float-label flex flex-column w-full">
+              <input pInputText id="email" formControlName="email" />
+              <label for="email">Email</label>
+            </span>
+          </div>
+
+          <div class="flex flex-column gap-2">
+            <span class="p-float-label flex flex-column w-full">
+              <input pInputText id="phone" formControlName="phone" />
+              <label for="phone">Teléfono</label>
+            </span>
+          </div>
+
+          <p-dropdown
+            [options]="countries"
+            formControlName="country"
+            optionLabel="name"
+            [filter]="true"
+            filterBy="name"
+            [showClear]="true"
+            styleClass="w-full"
+            placeholder="Select a City"
+          ></p-dropdown>
+
+          <p-button
+            [disabled]="profileForm.invalid || !this.profileForm.dirty"
+            styleClass="w-full"
+            label="Guardar"
+            [loading]="isLoading"
+            (onClick)="save()"
+          ></p-button>
+
+          @if (true) {
+            <p-button
+              styleClass="w-full"
+              label="Cargar información anterior"
+              [loading]="isLoading"
+              (onClick)="setProfileForm()"
+            ></p-button>
+          }
+        </div>
+      </form>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      @if (profileForm.valid && profileForm.dirty) {
+        <p-tag severity="success" value="El formulario es valido"></p-tag>
+      } @else if (profileForm.invalid && profileForm.dirty) {
+        <p-tag severity="danger" value="El formulario es inválido"></p-tag>
+      }
+      <span>
+        {{ saveForm() | json }}
+      </span>
+    </ng-template>
+  </p-card>
+</section>

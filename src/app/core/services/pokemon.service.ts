@@ -32,7 +32,6 @@ export class PokemonService {
   constructor() {}
 
   getPaginationListPokemon(page: number = 0) {
-    console.log('getPaginationListPokemon', page);
     this.state.set({ ...this.state(), loading: true });
     this.#http
       .get<PokemonListPagination>(`${this.URL_BASE}?limit=1302`)

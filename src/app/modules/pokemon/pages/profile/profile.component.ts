@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { ToolbarComponent } from '../../components/toolbar/toolbar.component';
 import { CardModule } from 'primeng/card';
 import {
+  FormArray,
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
@@ -32,27 +33,23 @@ import { TagModule } from 'primeng/tag';
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent implements OnInit {
-  profileForm!: FormGroup;
-  countries = countries;
-
   formBuilder = inject(FormBuilder);
-  isLoading = false;
+  countries = countries;
   profileFormSave = profileForm;
+  isLoading = false;
   saveForm = signal(undefined);
 
-  constructor() {}
+  profileForm: FormGroup = this.formBuilder.group({
+    nickname: ['', Validators.required, UsernameValidator],
+    firstName: ['', Validators.required],
+    lastName: [''],
+    email: ['', [Validators.required, Validators.email]],
+    phone: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+    country: ['', Validators.required],
+    state: [''],
+  });
 
   ngOnInit(): void {
-    this.profileForm = this.formBuilder.group({
-      nickname: ['', Validators.required, UsernameValidator],
-      firstName: ['', Validators.required],
-      lastName: [''],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
-      country: ['', Validators.required],
-      state: [''],
-    });
-
     this.profileForm.valueChanges.subscribe((value) => {
       console.log(value);
     });
@@ -60,10 +57,7 @@ export class ProfileComponent implements OnInit {
 
   save() {
     console.log('The form is invalid:', this.profileForm.invalid);
-    if (this.profileForm.invalid) {
-      return;
-    }
-
+    if (this.profileForm.invalid) return;
     this.isLoading = true;
     this.saveForm.set(this.profileForm.value);
     this.profileFormSave = this.profileForm.value;

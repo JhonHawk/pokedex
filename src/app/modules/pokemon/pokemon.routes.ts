@@ -5,7 +5,7 @@ import { PokemonDetailComponent } from './pages/pokemon-detail/pokemon-detail.co
 export const routes: Routes = [
   {
     path: 'pokedex/0',
-    redirectTo: 'pokedex/1',
+    redirectTo: 'pokedex/0',
   },
   {
     path: 'pokedex/:page',
@@ -30,7 +30,7 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'pokedex/1',
+    redirectTo: 'pokedex/0',
     pathMatch: 'full',
   },
 ];

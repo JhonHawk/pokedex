@@ -5,6 +5,7 @@
     <ng-template pTemplate="body">
       <form [formGroup]="profileForm">
         <div class="flex flex-column w-full justify-content-center gap-5">
+
           <div class="flex flex-column gap-2">
             <span class="p-float-label flex flex-column w-full">
               <input pInputText id="nickname" formControlName="nickname" />
@@ -51,7 +52,7 @@
             filterBy="name"
             [showClear]="true"
             styleClass="w-full"
-            placeholder="Select a City"
+            placeholder="Selecciona un país"
           ></p-dropdown>
 
           <p-button

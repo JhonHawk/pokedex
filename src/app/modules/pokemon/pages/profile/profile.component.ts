@@ -2,7 +2,6 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { ToolbarComponent } from '../../components/toolbar/toolbar.component';
 import { CardModule } from 'primeng/card';
 import {
-  FormArray,
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,

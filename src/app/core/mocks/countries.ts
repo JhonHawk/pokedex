@@ -2,8 +2,8 @@ export const profileForm = {
   nickname: 'JhonHawk',
   firstName: 'Juan Manuel',
   lastName: 'Martinez',
-  email: 'jmmartinez@gcpglobal.com',
-  phone: '5576968996',
+  email: 'test_one@yopmail.com',
+  phone: '5576961122',
   country: {
     name: 'Mexico',
     code: 'MX',
